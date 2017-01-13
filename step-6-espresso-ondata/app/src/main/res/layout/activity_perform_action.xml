@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_perform_action"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.espresso.PerformActionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_animal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_animal_hint" />
+
+        <Button
+            android:id="@+id/button_buy"
+            android:text="@string/button_buy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_result"
+            android:text="What animal do you want to buy?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_people"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dog"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dog" />
+
+            <TextView
+                android:id="@+id/cat"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+
+            <TextView
+                android:id="@+id/fish"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fish" />
+
+            <TextView
+                android:id="@+id/horse"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horse" />
+
+            <TextView
+                android:id="@+id/dragon"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dragon" />
+
+            <TextView
+                android:id="@+id/snake"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Snake" />
+
+            <TextView
+                android:id="@+id/ant"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ant" />
+
+            <TextView
+                android:id="@+id/seahorse"
+                style="@style/TextItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sea Horse" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

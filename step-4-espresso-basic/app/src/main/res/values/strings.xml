@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Espresso</string>
+    <string name="edit_name_hint">Your name</string>
+    <string name="button_greeting_description">Say greeting</string>
+    <string name="edit_name_description">This is where you type your name</string>
+    <string name="button_greeting">Say Greeting</string>
+    <string name="edit_animal_hint">Animal</string>
+    <string name="button_buy">Buy</string>
+    <string-array name="spinner">
+        <item>Americano</item>
+        <item>Vietnam</item>
+        <item>America</item>
+        <item>Japan</item>
+        <item>Namek</item>
+        <item>Earth</item>
+        <item>Heaven</item>
+    </string-array>
+    <string-array name="countries">
+        <item>Vietnam</item>
+        <item>America</item>
+        <item>Japan</item>
+        <item>Macau</item>
+        <item>Macedonia</item>
+        <item>Madagascar</item>
+        <item>Malawi</item>
+        <item>Malaysia</item>
+        <item>Maldives</item>
+        <item>Mali</item>
+        <item>Malta</item>
+        <item>Marshall Islands</item>
+        <item>Mauritania</item>
+        <item>Mauritius</item>
+        <item>Mexico</item>
+        <item>Micronesia</item>
+        <item>Moldova</item>
+        <item>Monaco</item>
+        <item>Mongolia</item>
+        <item>Montenegro</item>
+        <item>Morocco</item>
+        <item>Mozambique</item>
+
+    </string-array>
+</resources>

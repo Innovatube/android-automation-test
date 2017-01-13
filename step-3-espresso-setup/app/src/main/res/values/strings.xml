@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Espresso</string>
+    <string name="edit_name_hint">Your name</string>
+    <string name="button_greeting_description">Say greeting</string>
+    <string name="edit_name_description">This is where you type your name</string>
+    <string name="button_greeting">Say Greeting</string>
+</resources>

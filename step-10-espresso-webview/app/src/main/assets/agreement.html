@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+	body{
+		font-family: -apple-system, Helvetica, Arial, sans-serif;
+		color: #444;
+	}
+
+    </style>
+</head>
+<body>
+<p name="title"><strong>LICENSED APPLICATION END USER LICENSE AGREEMENT</strong></p>
+<p>The Products transacted through the Service are licensed, not sold, to You for use only under the
+    terms of this license, unless a Product is accompanied by a separate license agreement, in which
+    case the terms of that separate license agreement will govern, subject to Your prior acceptance
+    of that separate license agreement. The licensor (“Application Provider”) reserves all rights
+    not expressly granted to You. The Product that is subject to this license is referred to in this
+    license as the “Licensed Application.”</p>
+<form>
+    <span>Enter your name:</span>
+    <input type="text" name="name"/>
+    <br>
+    <span>I agree:</span>
+    <input type="checkbox" name="agree"/>
+    <br>
+    <input type="submit" name="submit"/>
+</form>
+<p id="instruction">Please type your name, tick the above checkbox then submit</p>
+<script type="text/javascript">
+        const element = document.querySelector('form');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+            console.log(element.elements);
+            if(!element.elements[1].checked){
+                instruction.innerHTML="Please accept the agreement";
+            }else if(element.elements[1].value.length!=0){
+                instruction.innerHTML = "Please type your name";
+            }else{
+                instruction.innerHTML = "Thank you " + element.elements[0].value + "!";
+            }
+        });
+
+
+</script>
+</body>
+</html>
