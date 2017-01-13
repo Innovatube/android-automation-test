@@ -52,16 +52,16 @@
             <h3>Activity</h3>
             <p>An activity is the entry point for interacting with the user. It represents a single screen with a user interface. For example, an email app might have one activity that shows a list of new emails, another activity to compose an email, and
                 another activity for reading emails. </p>
-            <img src="/img/activity-screen-1.jpg" />
-            <img src="/img/activity-screen-2.jpg" />
+            <img src="img/activity-screen-1.jpg" />
+            <img src="img/activity-screen-2.jpg" />
             <p>If you want to know more about Activity, click <a href="https://developer.android.com/reference/android/app/Activity.html">here</a></p>
             <h3>Service</h3>
             Services A service is a general-purpose entry point for keeping an app running in the background for all kinds of reasons. It is a component that runs in the background to perform long-running operations or to perform work for remote processes. A service
             does not provide a user interface. For example, a service might play music in the background while the user is in a different app:
-            <img src="/img/banner_service.png" />
+            <img src="img/banner_service.png" />
             <p>If you want to know more about Service, click <a href="https://developer.android.com/reference/android/app/Service.html">here</a></p>
             <h3>Intent</h3>
-            <img src="/img/intent.png" />
+            <img src="img/intent.png" />
             <p> Activity & Service are activated by an asynchronous message called an <i>intent</i>.It defines the action to perform (for example, to view or send something) and may specify the URI of the data to act on, among other things that the component
                 being started might need to know. </p>
             <p>If you want to know more about Intent, click
@@ -237,7 +237,7 @@ $ uiautomatorviewer
             <h3>Download Espresso</h3>
             <ol>
                 <li>Make sure you have installed the latest Android Support Repository under Extras.</li>
-                <a href="img/support-libs.png" data-lightbox="example"><img src="/img/support-libs.png " data-lightbox="support-libs" /></a>
+                <a href="img/support-libs.png" data-lightbox="example"><img src="img/support-libs.png " data-lightbox="support-libs" /></a>
                 <li>Swith to Android view.</li>
                 <li>Open your app’s build.gradle file. This is usually not the top-level build.gradle file but app/build.gradle.</li>
                 <li>Add the following lines inside dependencies:</li>
@@ -251,7 +251,7 @@ androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
                 <pre><code>testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner "</code></pre>
                 <li>Click Sync Now</li>
             </ol>
-            <a href="img/espresso-setup.jpg" data-lightbox="example"><img src="/img/espresso-setup.jpg" data-lightbox="espresso-setup" /></a>
+            <a href="img/espresso-setup.jpg" data-lightbox="example"><img src="img/espresso-setup.jpg" data-lightbox="espresso-setup" /></a>
 
             <h3>Example build.gradle file</h3>
             <pre><code>
@@ -285,7 +285,7 @@ dependencies {
     })
 }</code></pre>
             <h3>Add the first test</h3>
-            <a href="img/espresso-first-test.jpg" data-lightbox="example"><img src="/img/espresso-first-test.jpg " /></a>
+            <a href="img/espresso-first-test.jpg" data-lightbox="example"><img src="img/espresso-first-test.jpg " /></a>
             <ol>
                 <li>Change too Android View</li>
                 <li>Create new test class under <i>src/androidTest/java/com.example.package/</i></li>
@@ -334,10 +334,10 @@ public class HelloWorldEspressoTest {
                 </aside>
                 <img src="img/animation.png" />
                 <h3>In Android Studio</h3>
-                <img src="/img/espresso-runner-first.jpg " /> Right click on androidTest, select <i>'Run Test in com.example.packagename'</i> .If you can't excute test with this method, move to step 2.
+                <img src="img/espresso-runner-first.jpg " /> Right click on androidTest, select <i>'Run Test in com.example.packagename'</i> .If you can't excute test with this method, move to step 2.
                 <p>Create a test configuration</p>
                 <p>In Android Studio:</p>
-                <a class="example-image-link" href="img/espresso-runner.jpg" data-lightbox="example-1 "><img src="/img/espresso-runner.jpg " /></a>
+                <a class="example-image-link" href="img/espresso-runner.jpg" data-lightbox="example-1 "><img src="img/espresso-runner.jpg " /></a>
                 <ol>
                     <li>Open Run menu -> Edit Configurations</li>
                     <li>Add a new Android Tests configuration</li>
@@ -397,9 +397,9 @@ public class HelloWorldEspressoTest {
 
             <pre><code>Espresso.onView(ViewMatchers.withId(R.id.my_view))</code></pre>
             <p><strong>It's time for you to practice</strong></p>
-            <img src="/img/findview-practice-screen.png " />
+            <img src="img/findview-practice-screen.png " />
             <p>Open Espresso Project then open HelloWorldEspressoTest.java</p>
-            <a class="example-image-link" href="/img/findview-practice.jpg" data-lightbox="example-1"><img src="/img/findview-practice.jpg " /></a>
+            <a class="example-image-link" href="img/findview-practice.jpg" data-lightbox="example-1"><img src="img/findview-practice.jpg " /></a>
             <p>Navigate to method <i>testFindItemById</i></p>
             <p>Use UIAutomatorViewer to find <b>id</b> of <i>Say Greeting</i> button, and <i>Your name</i> edit text</p>
             <p>Sometimes, R.id values are shared between multiple views. When this happens an attempt to use a particular <code class="highlighter-rouge ">R.id</code> gives you an <code class="highlighter-rouge
@@ -447,7 +447,7 @@ public class HelloWorldEspressoTest {
             <p>For example, to click on the view:</p>
 
             <pre><code>Espresso.onView(...).perform(ViewActions.click());</code></pre>
-            <img src="/img/perform-action.png " />
+            <img src="img/perform-action.png " />
             <p><strong>It's your time to practice: Open <i>PerformActionActivityTest.java</i></strong></p>
             <p>Use UIAutomatorViewer to get PerformActionActivity's view hierarchy then perform <i>click()</i> on <i>Buy</i> button</p>
 
@@ -564,10 +564,10 @@ is-focused<span class="o ">=</span><span class="nb ">false</span>, is-focusable<
         </google-codelab-step>
         <google-codelab-step label=" Espresso cheat sheet " duration="20">
             <p> You can download pdf version from <a href="https://google.github.io/android-testing-support-library/downloads/espresso-cheat-sheet-2.1.0.pdf ">here</a></p>
-            <img src="/img/espresso-cheatsheet.png" />
-            <img src="/img/viewmatcher.png" />
-            <img src="/img/dataoptions.png" />
-            <img src="/img/intentmatcher.jpg " />
+            <img src="img/espresso-cheatsheet.png" />
+            <img src="img/viewmatcher.png" />
+            <img src="img/dataoptions.png" />
+            <img src="img/intentmatcher.jpg " />
         </google-codelab-step>
         <google-codelab-step label="Espresso onData with AdapterView" duration="40">
             <aside class="special">Open step-6-espresso-ondata in Android Studio</aside>
@@ -614,7 +614,7 @@ is-focused<span class="o ">=</span><span class="nb ">false</span>, is-focusable<
                 .check(ViewAssertions.matches(ViewMatchers.withText(Matchers.containsString("Americano"))));</code></pre>
             <h3 id="matching-data-using-ondata-and-a-custom-viewmatcher">Matching data using onData() and a custom ViewMatcher</h3>
             <p>The activity below contains a ListView, which is backed by a <a href="http://developer.android.com/reference/android/widget/ArrayAdapter.html">ArrayAdapter</a> that holds data for each row in a <code class="highlighter-rouge">List&lt;Object&gt;</code>.</p>
-            <img src="/img/listview-screen.png" />
+            <img src="img/listview-screen.png" />
             <p>Each item contains two attributes: name and flag. For example:</p>
             <pre><code>{name: "Afghanistan", flag: "https://www.countries-ofthe-world.com/flags-normal/flag-of-Afghanistan.png"}</code></pre>
             <p>The code for a click on the row with "name:Vietnam" looks like this</p>
@@ -1274,7 +1274,7 @@ public void clickOnAndroidHomeIcon_OpensNavigation() {
         </google-codelab-step>
     </google-codelab>
 
-    <script src="/bower_components/lightbox/lightbox-plus-jquery.min.js "></script>
+    <script src="bower_components/lightbox/lightbox-plus-jquery.min.js "></script>
 </body>
 
 </html>
