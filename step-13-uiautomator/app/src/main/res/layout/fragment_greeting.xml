@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context="com.example.uiautomator.GreetingFragment">
+
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your name" />
+
+    <Button
+        android:id="@+id/button_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Greeting" />
+
+    <TextView
+        android:id="@+id/text_greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Greeting text"
+        android:gravity="center"
+        android:text="Hello World!" />
+</LinearLayout>
