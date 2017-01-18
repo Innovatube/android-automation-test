@@ -10,9 +10,9 @@
     <title>Android UI Testing</title>
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/lightbox.min.css">
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="import" href="elements/codelab.html">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <style>
         body {
             font-family: "Roboto", sans-serif;
@@ -20,17 +20,15 @@
     </style>
     <script type="text/javascript">
         function showInstructions(system) {
-            document.getElementById("system-linux").style.display = "none";
-            document.getElementById("system-mac").style.display = "none";
-            document.getElementById("system-windows").style.display = "none";
+            $("[id^=system-]").hide();
             if (system == "linux") {
-                document.getElementById("system-linux").style.display = "block";
+                $("[id^=system-linux]").show();
             } else if (system == "mac") {
-                document.getElementById("system-mac").style.display = "block";
+                $("[id^=system-mac]").show();
             } else {
-                document.getElementById("system-windows").style.display = "block";
+                $("[id^=system-windows]").show();
             }
-            document.getElementById("instructions-option").value = system;
+            $("[id^=instructions-option]").val(system);
         }
 
         function loadDefaultInnstruction() {
@@ -42,27 +40,44 @@
                 showInstructions("windows");
             }
         }
+
+        $(document).ready(function() {
+            $(function() {
+                $.each(document.images, function() {
+                    var that = this;
+                    var src = $(that).attr('src') || '';
+                    if (!src.length > 0) {
+                        var fsrc = $(that).attr('fsrc');
+                        var img = new Image();
+                        img.src = fsrc;
+                        $(img).load(function() {
+                            that.src = this.src;
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </head>
 
 <body unresolved class="fullbleed" onload="loadDefaultInnstruction();">
 
-    <google-codelab title="Android UI Testing" environment="web" feedback-link="#">
+    <google-codelab title="Android UI Testing" environment="web" feedback-link="">
         <google-codelab-step label="Basic concept about Android" duration="45">
             <h2>Activity, Service & Intent</h2>
             <h3>Activity</h3>
             <p>An activity is the entry point for interacting with the user. It represents a single screen with a user interface. For example, an email app might have one activity that shows a list of new emails, another activity to compose an email, and
                 another activity for reading emails. </p>
-            <img src="img/activity-screen-1.jpg" />
-            <img src="img/activity-screen-2.jpg" />
+            <img fsrc="img/activity-screen-1.jpg" />
+            <img fsrc="img/activity-screen-2.jpg" />
             <p>If you want to know more about Activity, click <a href="https://developer.android.com/reference/android/app/Activity.html">here</a></p>
             <h3>Service</h3>
             Services A service is a general-purpose entry point for keeping an app running in the background for all kinds of reasons. It is a component that runs in the background to perform long-running operations or to perform work for remote processes. A service
             does not provide a user interface. For example, a service might play music in the background while the user is in a different app:
-            <img src="img/banner_service.png" />
+            <img fsrc="img/banner_service.png" />
             <p>If you want to know more about Service, click <a href="https://developer.android.com/reference/android/app/Service.html">here</a></p>
             <h3>Intent</h3>
-            <img src="img/intent.png" />
+            <img fsrc="img/intent.png" />
             <p> Activity & Service are activated by an asynchronous message called an <i>intent</i>.It defines the action to perform (for example, to view or send something) and may specify the URI of the data to act on, among other things that the component
                 being started might need to know. </p>
             <p>If you want to know more about Intent, click
@@ -89,7 +104,7 @@
 
                 <p>That's it! The following video shows each step of the recommended setup procedure.</p>
 
-                <video controls style="max-width: 737.14px;">
+                <video controls style="max-width: 737.14px;" preload="none" poster="img/thumbnail-studio-install-windows.jpg">
                 <source src="https://storage.googleapis.com/androiddevelopers/videos/studio-install-windows.mp4" type="video/mp4">
                 </video>
 
@@ -111,7 +126,7 @@ Check for Update</strong>.</p>
 
                 <p>That's it! The following video shows each step of the recommended setup procedure.</p>
 
-                <video controls style="max-width: 737.14px;">
+                <video controls style="max-width: 737.14px;" preload="none" poster="img/thumbnail-studio-install-mac.jpg">
                 <source src="https://storage.googleapis.com/androiddevelopers/videos/studio-install-mac.mp4" type="video/mp4">
                 </video>
 
@@ -148,7 +163,7 @@ Check for Update</strong>.</p>
                 </div>
 
                 <p>That's it! The following video shows each step of the recommended setup procedure.</p>
-                <video controls style="max-width: 737.14px;">
+                <video controls style="max-width: 737.14px;" preload="none" video="img/thumbnail-studio-install-windows.jpg">
                 <source src="https://storage.googleapis.com/androiddevelopers/videos/studio-install-linux.mp4" type="video/mp4">
                 </video>
                 <p>As new tools and other APIs become available, Android Studio tells you with a pop-up, or you can check for updates by clicking <strong>Help &gt;
@@ -157,7 +172,7 @@ Check for Update</strong>.</p>
             </div>
             <h2>Create your first project</h2>
             <p>Open Android Studio then perform the following step to create an android project</p>
-            <img src="img/android-new-project.jpg" />
+            <img fsrc="img/android-new-project.jpg" />
             <ol>
                 <li>Click on <i>Start a new Android Studio Project</i></li>
                 <li>Type application's name</li>
@@ -172,15 +187,15 @@ Check for Update</strong>.</p>
             <p>The combination of build types and build flavor forms a <i>Build Variants</i>.</p>
             <p>To add a new Flavor</p>
             <p>Click on Build-> Edit Flavors</p>
-            <img src="img/add-flavor.jpg" />
+            <img fsrc="img/add-flavor.jpg"  style="max-width: 370px"/>
             <p>You can edit the flavor name, application id, add a new signing config... Click on <i>OK</i> when you're done </p>
-            <img src="img/edit-flavor.jpg" />
+            <img fsrc="img/edit-flavor.jpg" />
             <p>To change <i>Build Variant</i>, perform the following step:</p>
             <ul>
                 <li>Click on Build Variant</li>
                 <li>Change build variant from dropdown menu</li>
             </ul>
-            <img src="img/change-variant.jpg" />
+            <img fsrc="img/change-variant.jpg" style="max-width: 444px" />
             <h2>How to use UIAutomatorviewer to get view's hierarchy</h2>
             The uiautomatorviewer tool provides a convenient visual interface to inspect the layout hierarchy and view the properties of UI components that are visible on the foreground of the device. This information lets you create more fine-grained tests using
             UI Automator. For example, you can create a UI selector that matches a specific visible property.
@@ -189,6 +204,12 @@ Check for Update</strong>.</p>
                 <li>Launch the target app on a physical device.</li>
                 <li>Connect the device to your development machine.</li>
                 <li>Open a terminal window and navigate to the &lt;android-sdk&gt;/tools/ directory.</li>
+                <i>use <code>cd</code> command to change directory</i>
+                <pre><code>cd /PATH/TO/YOUR/ANDROID-SDK/
+cd tools/
+</code></pre>
+                <p>if you're using Ubuntu 16.04 or higher, <i>right click</i> in &lt;android-sdk&gt;/tools, select <i>Open in terminal</i>.</p>
+                <p>if you're using Windows 7 or higher, <i>shift+right click</i> in &lt;android-sdk&gt;/tools, select <i>Open Command Window Here</i>.</p>
                 <li>Run the tool with this command:</li>
                 <pre><code>
 $ uiautomatorviewer
@@ -203,7 +224,7 @@ $ uiautomatorviewer
                 <li>Optionally, click on the <strong>Toggle NAF Nodes</strong> button to see UI components that are non-accessible to UI Automator. Only limited information may be available for these components.
                 </li>
             </ol>
-            <a href="img/uiautomatorviewer.png" data-lightbox="example"><img src="img/uiautomatorviewer.png" data-lightbox="uiautomatorviewer" /></a>
+            <a href="img/uiautomatorviewer.png" data-lightbox="example"><img fsrc="img/uiautomatorviewer.png" data-lightbox="uiautomatorviewer" /></a>
         </google-codelab-step>
         <google-codelab-step label="Get the sample code" duration="10">
             <p>Download all he sample code to your computer as a zip file from github by using this link</p>
@@ -227,7 +248,9 @@ $ uiautomatorviewer
                     <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-9-espresso-intent</strong>—The starting code for for stubbing and verify intent</li>
                     <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-10-espresso-web</strong>—The starting code for webview testing</li>
                     <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-11-espresso-idling</strong>—The starting code for idling resources</li>
-                    <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-12-codelab-final</strong>—The starting code for idling resources</li>
+                    <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-12-codelab-final</strong>—The starting code for codelab project</li>
+                    <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-13-uiautomator</strong>—The starting code for UI Automator</li>
+                    <li><img style="max-width: 20.00px" src="img/bb745dc85ae69f6b.png"><strong>step-14-appium</strong>—The starting code for Appium</li>
                 </ul>
                 <div id="background" class="style-scope paper-ripple"></div>
                 <div id="waves" class="style-scope paper-ripple"></div>
@@ -238,7 +261,7 @@ $ uiautomatorviewer
             <h3>Download Espresso</h3>
             <ol>
                 <li>Make sure you have installed the latest Android Support Repository under Extras.</li>
-                <a href="img/support-libs.png" data-lightbox="example"><img src="img/support-libs.png " data-lightbox="support-libs" /></a>
+                <a href="img/support-libs.png" data-lightbox="example"><img fsrc="img/support-libs.png " data-lightbox="support-libs" /></a>
                 <li>Swith to Android view.</li>
                 <li>Open your app’s build.gradle file. This is usually not the top-level build.gradle file but app/build.gradle.</li>
                 <li>Add the following lines inside dependencies:</li>
@@ -252,7 +275,7 @@ androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
                 <pre><code>testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner "</code></pre>
                 <li>Click Sync Now</li>
             </ol>
-            <a href="img/espresso-setup.jpg" data-lightbox="example"><img src="img/espresso-setup.jpg" data-lightbox="espresso-setup" /></a>
+            <a href="img/espresso-setup.jpg" data-lightbox="example"><img fsrc="img/espresso-setup.jpg" data-lightbox="espresso-setup" /></a>
 
             <h3>Example build.gradle file</h3>
             <pre><code>
@@ -286,7 +309,7 @@ dependencies {
     })
 }</code></pre>
             <h3>Add the first test</h3>
-            <a href="img/espresso-first-test.jpg" data-lightbox="example"><img src="img/espresso-first-test.jpg " /></a>
+            <a href="img/espresso-first-test.jpg" data-lightbox="example"><img fsrc="img/espresso-first-test.jpg " /></a>
             <ol>
                 <li>Change too Android View</li>
                 <li>Create new test class under <i>src/androidTest/java/com.example.package/</i></li>
@@ -333,12 +356,12 @@ public class HelloWorldEspressoTest {
                         <li>Animator duration scale</li>
                     </ul>
                 </aside>
-                <img src="img/animation.png" />
+                <img fsrc="img/animation.png" />
                 <h3>In Android Studio</h3>
-                <img src="img/espresso-runner-first.jpg " /> Right click on androidTest, select <i>'Run Test in com.example.packagename'</i> .If you can't excute test with this method, move to step 2.
+                <img fsrc="img/espresso-runner-first.jpg " /> Right click on androidTest, select <i>'Run Test in com.example.packagename'</i> .If you can't excute test with this method, move to step 2.
                 <p>Create a test configuration</p>
                 <p>In Android Studio:</p>
-                <a class="example-image-link" href="img/espresso-runner.jpg" data-lightbox="example-1 "><img src="img/espresso-runner.jpg " /></a>
+                <a class="example-image-link" href="img/espresso-runner.jpg" data-lightbox="example-1 "><img fsrc="img/espresso-runner.jpg " /></a>
                 <ol>
                     <li>Open Run menu -> Edit Configurations</li>
                     <li>Add a new Android Tests configuration</li>
@@ -398,9 +421,9 @@ public class HelloWorldEspressoTest {
 
             <pre><code>Espresso.onView(ViewMatchers.withId(R.id.my_view))</code></pre>
             <p><strong>It's time for you to practice</strong></p>
-            <img src="img/findview-practice-screen.png " />
+            <img fsrc="img/findview-practice-screen.png " />
             <p>Open Espresso Project then open HelloWorldEspressoTest.java</p>
-            <a class="example-image-link" href="img/findview-practice.jpg" data-lightbox="example-1"><img src="img/findview-practice.jpg " /></a>
+            <a class="example-image-link" href="img/findview-practice.jpg" data-lightbox="example-1"><img fsrc="img/findview-practice.jpg " /></a>
             <p>Navigate to method <i>testFindItemById</i></p>
             <p>Use UIAutomatorViewer to find <b>id</b> of <i>Say Greeting</i> button, and <i>Your name</i> edit text</p>
             <p>Sometimes, R.id values are shared between multiple views. When this happens an attempt to use a particular <code class="highlighter-rouge ">R.id</code> gives you an <code class="highlighter-rouge
@@ -448,7 +471,7 @@ public class HelloWorldEspressoTest {
             <p>For example, to click on the view:</p>
 
             <pre><code>Espresso.onView(...).perform(ViewActions.click());</code></pre>
-            <img src="img/perform-action.png " />
+            <img fsrc="img/perform-action.png " />
             <p><strong>It's your time to practice: Open <i>PerformActionActivityTest.java</i></strong></p>
             <p>Use UIAutomatorViewer to get PerformActionActivity's view hierarchy then perform <i>click()</i> on <i>Buy</i> button</p>
 
@@ -565,10 +588,10 @@ is-focused<span class="o ">=</span><span class="nb ">false</span>, is-focusable<
         </google-codelab-step>
         <google-codelab-step label=" Espresso cheat sheet " duration="20">
             <p> You can download pdf version from <a href="https://google.github.io/android-testing-support-library/downloads/espresso-cheat-sheet-2.1.0.pdf ">here</a></p>
-            <img src="img/espresso-cheatsheet.png" />
-            <img src="img/viewmatcher.png" />
-            <img src="img/dataoptions.png" />
-            <img src="img/intentmatcher.jpg " />
+            <img fsrc="img/espresso-cheatsheet.png" />
+            <img fsrc="img/viewmatcher.png" />
+            <img fsrc="img/dataoptions.png" />
+            <img fsrc="img/intentmatcher.jpg " />
         </google-codelab-step>
         <google-codelab-step label="Espresso onData with AdapterView" duration="40">
             <aside class="special">Open step-6-espresso-ondata in Android Studio</aside>
@@ -615,7 +638,7 @@ is-focused<span class="o ">=</span><span class="nb ">false</span>, is-focusable<
                 .check(ViewAssertions.matches(ViewMatchers.withText(Matchers.containsString("Americano"))));</code></pre>
             <h3 id="matching-data-using-ondata-and-a-custom-viewmatcher">Matching data using onData() and a custom ViewMatcher</h3>
             <p>The activity below contains a ListView, which is backed by a <a href="http://developer.android.com/reference/android/widget/ArrayAdapter.html">ArrayAdapter</a> that holds data for each row in a <code class="highlighter-rouge">List&lt;Object&gt;</code>.</p>
-            <img src="img/listview-screen.png" />
+            <img fsrc="img/listview-screen.png" />
             <p>Each item contains two attributes: name and flag. For example:</p>
             <pre><code>{name: "Afghanistan", flag: "https://www.countries-ofthe-world.com/flags-normal/flag-of-Afghanistan.png"}</code></pre>
             <p>The code for a click on the row with "name:Vietnam" looks like this</p>
@@ -713,9 +736,9 @@ private Matcher<RecyclerView.ViewHolder> hasName(final String name) {
             <aside class="special">Open step-8-espresso-contrib in Android Studio</aside>
             <p>Espresso-contrib is a external contributions that contain DatePicker, RecyclerView, Drawer actions, Accessibility check and CountingIdlingResouces</p>
             <p>You've already known about RecyclerViewActions, let's get started with DatePicker</p>
-            <img src="img/main-activity.png" />
+            <img fsrc="img/main-activity.png" />
             <p>When you click on <i>Your birthday</i>, the following dialog will appear</p>
-            <img src="img/datepicker.png" />
+            <img fsrc="img/datepicker.png" />
             <p>Navigate to <code>MainActivityTest.java</code></p>
             <pre><code>@Test
 public void testSetBod() throws Exception {
@@ -731,7 +754,7 @@ public void testSetBod() throws Exception {
             <p><strong>Time for Navigation Drawer</strong></p>
             <p>The navigation drawer is a panel that displays the app’s main navigation options on the left edge of the screen. It is hidden most of the time, but is revealed when the user swipes a finger from the left edge of the screen or, while at the
                 top level of the app, the user touches the app icon in the action bar.</p>
-            <img src="img/navigation-drawer.png" />
+            <img fsrc="img/navigation-drawer.png" />
             <ol>
                 <li>NavigationView</li>
                 <li>NavigationHeader</li>
@@ -796,7 +819,7 @@ onView(allOf(isAssignableFrom(TextView.class), isDescendantOfA(isAssignableFrom(
                 int) to communicate with a background Service. An Intent provides a facility for performing late runtime binding between the code in different applications. Its most significant use is in the launching of activities, where it can be thought
                 of as the glue between activities. It is basically a passive data structure holding an abstract description of an action to be performed.
             </p>
-            <img src="img/intent-structure.png" />
+            <img fsrc="img/intent-structure.png" />
             <p>Espresso-Intents is an extension to Espresso, which enables validation and stubbing of Intents sent out by the application under test. It’s like <a href="http://mockito.org/">Mockito</a>, but for Android Intents.</p>
 
             <h2 id="download-espresso-intents">Download Espresso-Intents</h2>
@@ -829,7 +852,7 @@ androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
             <h2 id="intent-validation">Intent validation</h2>
             <p>Espresso-Intents records all intents that attempt to launch activities from the application under test. Using the intended API (cousin of <em><code class="highlighter-rouge">Mockito.verify</code></em>), you can assert that a given intent has
                 been seen.</p>
-            <img src="img/profile-activity.png" />
+            <img fsrc="img/profile-activity.png" />
             <p>When user click on <i>Sign Up</i> button, Register Activity will be shown, username and email address will be sent back to ProfileActivity.</p>
             <p>Similar to <i>Select Avatar</i> button, selected image will be shown under <i>Select Avatar</i> button</p>
             <p>An example test that simply validates an outgoing intent:</p>
@@ -1164,9 +1187,9 @@ public class CreateAccountActivityRealTest {
                 </tbody>
             </table>
             <p>The first test you're writing is using the <code>prodDebug</code> variant - make sure to select it for your test artifact before continuing.</p>
-            <img src="img/7d867483dc450c86.png" />
+            <img fsrc="img/7d867483dc450c86.png" />
             <p><strong>Don't forget to disable animation</strong></p>
-            <img style="max-width: 335.08px;" src="img/96bf3222a3a23c5f.png" />
+            <img style="max-width: 335.08px;" fsrc="img/96bf3222a3a23c5f.png" />
             <h2>Espresso Test 1: Opening the ‘Add Note' screen</h2>
             <p><strong>androidTest/.../NotesScreenTest.java</strong></p>
             <pre><code> @Test
@@ -1197,7 +1220,7 @@ public void addNoteToNotesList() throws Exception {
 </code></pre>
             <h2>Espresso Test 3: Clicking a note</h2>
             <h3>Switch build variant to mockDebug</h3>
-            <img src="img/791d63860007f7b8.png" />
+            <img fsrc="img/791d63860007f7b8.png" />
             <p><strong>androidTestMock/.../NoteDetailScreenTest.java</strong></p>
             <pre><code>@Before
 public void intentWithStubbedNoteId() {
@@ -1220,7 +1243,7 @@ public void intentWithStubbedNoteId() {
 
             <h2>Espresso Test 4: Intent stubbing with add note screen test</h2>
             <h3>Switch build variant to mockDebug</h3>
-            <img src="img/791d63860007f7b8.png" />
+            <img fsrc="img/791d63860007f7b8.png" />
             <p><strong>androidTestMock/.../AddNoteScreenTest.java</strong></p>
             <pre><code>@Test
 public void addImageToNote_ShowsThumbnailInUi() {
@@ -1273,9 +1296,420 @@ public void clickOnAndroidHomeIcon_OpensNavigation() {
 }
 </code></pre>
         </google-codelab-step>
+        <google-codelab-step label="UI Automator" duration="50">
+            <aside class="special">Open step-13-uiautomator in Android Studio</aside>
+            <h2>UI Automator</h2>
+
+            <p>The UI Automator testing framework provides a set of APIs to build UI tests that interactions on user apps and system apps as well as different apps. The UI Automator is well-suit for writing black box automated test.</p>
+
+            <p>The key features of the UI Automator testing framewok include:</p>
+
+            <ul>
+                <li>UI Automator Viewer: a viewer to inspect layout hierachy.</li>
+                <li>An <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html">API</a> to retrieve state information and perform operations on the target device, such as: press home, turn on screen, press back, take
+                    a screenshot.</li>
+                <li>APIs that support cross-app UI Testing.</li>
+            </ul>
+            <h3>UI Automator Viewer</h3>
+            The uiautomatorviewer tool provides a convenient visual interface to inspect the layout hierarchy and view the properties of UI components that are visible on the foreground of the device. This information lets you create more fine-grained tests using
+            UI Automator. For example, you can create a UI selector that matches a specific visible property.
+            <br>To launch the uiautomatorviewer tool:
+            <ul>
+                <li>Launch the target app on a physical device.</li>
+                <li>Connect the device to your development machine.</li>
+                <li>Open a terminal window and navigate to the &lt;android-sdk&gt;/tools/ directory.</li>
+                <i>use <code>cd</code> command to change directory</i>
+                <pre><code>cd /PATH/TO/YOUR/ANDROID-SDK/
+cd tools/
+</code></pre>
+                <p>if you're using Ubuntu 16.04 or higher, <i>right click</i> in &lt;android-sdk&gt;/tools, select <i>Open in terminal</i>.</p>
+                <p>if you're using Windows 7 or higher, <i>shift+right click</i> in &lt;android-sdk&gt;/tools, select <i>Open Command Window Here</i>.</p>
+                <li>Run the tool with this command:</li>
+                <pre><code>
+$ uiautomatorviewer
+                    </code></pre>
+            </ul>
+            <p>To view the UI properties for your application:</p>
+            <ol>
+                <li>In the <code>uiautomatorviewer</code> interface, click the <strong>Device Screenshot</strong> button.
+                </li>
+                <li>Hover over the snapshot in the left-hand panel to see the UI components identified by the
+                    <code>uiautomatorviewertool</code>. The properties are listed in the lower right-hand panel and the layout hierarchy in the upper right-hand panel.</li>
+                <li>Optionally, click on the <strong>Toggle NAF Nodes</strong> button to see UI components that are non-accessible to UI Automator. Only limited information may be available for these components.
+                </li>
+            </ol>
+            <a href="img/uiautomatorviewer.png" data-lightbox="example"><img fsrc="img/uiautomatorviewer.png" data-lightbox="uiautomatorviewer" /></a>
+            <h3>UI Automator APIs</h3>
+
+            <p>The UI Automator APIs allow you to write robust tests without needing to know about the implementation details of the app that you are targeting.</p>
+
+            <ul>
+                <ul>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/By.html" target="_blank" title="By Class">By</a> &ndash; a utility class which enables the creation of BySelector.</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/BySelector.html" target="_blank" title="BySelector">BySelector</a> &ndash; Specifies a criteria for matching UI elements during a call to findObject(&hellip;)</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiCollection.html" target="_blank" title="UiCollection">UiCollection</a> &ndash; This class is used to enumerate UI elements for the purpose of counting,
+                        or targeting a sub elements by a child&rsquo;s text or description.
+                        <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html" target="_blank" title="UiObject"></a>
+                    </li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html" target="_blank" title="UiObject">UiObject</a> &ndash; A UiObject contains information to help it locate a matching view at runtime based
+                        on the UiSelector properties specified in its constructor. Once UiObject instance is created it can be reused for different views that match the selector criteria.</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject2.html" target="_blank" title="UiObject2">UiObject2</a> &ndash; Represents a UI element. This is slightly different from UiObject as UiObject2
+                        elements can be used even an underlying view object is terminated.</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiScrollable.html" target="_blank" title="UiScrollable">UiScrollable</a><span>&nbsp;</span>&ndash;&nbsp;UiScrollable is a UiCollection&nbsp;and provides
+                        support for searching for items in scrollable layout elements.</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html" target="_blank" title="UiSelector">UiSelector</a> &ndash; This specifies the UI elements in the layout hierarchy for tests to target,
+                        filtered by properties such as text value, content-description, class name, and state information, among others.</li>
+                    <li><a href="https://developer.android.com/reference/android/support/test/uiautomator/Configurator.html" target="_blank" title="Configurator">Configurator</a><span>&nbsp;</span>&ndash; Allows to set key parameters for running uiautomator
+                        tests. The new settings take effect immediately and can be changed any time during a test run</li>
+                </ul>
+
+            </ul>
+
+            <h3>Set Up UI Automator</h3>
+
+            <p>in the build.gradle file of your app module, you mus add a UI Automator library.</p>
+
+            <pre><code>dependencies {
+    ...
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
+}
+</code></pre>
+            <p>If your minSDK is lower than 18, you must add the following line to your src/androidTest/AndroidManifest.xml, if you don't have it, create a new one</p>
+            <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    package=&quot;YOUR.PACKAGE.NAME&quot;&gt;
+
+    &lt;uses-sdk
+        android:minSdkVersion=&quot;18&quot;
+        tools:overrideLibrary=&quot;android.support.test.uiautomator.v18&quot; /&gt;
+&lt;/manifest&gt;
+</code></pre>
+            <h2>Create your first UI Automator Test Class.</h2>
+
+            <p>Create your UI Automator test class, and put it under androidTest.</p>
+
+            <p>Add the @RunWith(AndroidJUnit4.class) annotaion at the beginning of your test class definition. You also need to specify the<a href="https://developer.android.com/reference/android/support/test/runner/AndroidJUnitRunner.html"><code>AndroidJUnitRunner</code></a><span>&nbsp;class provided in the Android Testing Support Library as your default test runner</span></p>
+            <p>Implement the following programming model in your UI Automator test class:</p>
+
+            <ol>
+                <li>Get a <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html"><code>UiDevice</code></a><span>&nbsp;</span>object to access the device you want to test, by calling the <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html#getInstance(android.app.Instrumentation)"><code>getInstance()</code></a><span>&nbsp;</span>method
+                    and passing it an <code><a href="https://developer.android.com/reference/android/app/Instrumentation.html">Instrumentation</a></code>object as the argument.</li>
+                <pre><code>UiDevice mUiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());</code></pre>
+                <li>Get a<span>&nbsp;</span><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a> object to access a UI component that is displayed on the device (for example, the current
+                    view in the foreground), by calling the<span>&nbsp;</span><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html#findObject(android.support.test.uiautomator.UiSelector)"><code>findObject()</code></a>                    method.</li>
+                <pre><code>UiObject nameEditText = mUiDevice.findObject(new UiSelector().resId("com.example.uiautomator:id/edit_name"));</code></pre>
+                <li>Simulate a specific user interaction to perform on that UI component, by calling a<span>&nbsp;</span><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a> method; for
+                    example, call<a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html#performMultiPointerGesture(android.view.MotionEvent.PointerCoords[]...)"><code>performMultiPointerGesture()</code></a><span>&nbsp;</span>to
+                    simulate a multi-touch gesture, and <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html#setText(java.lang.String)"><code>setText()</code></a><span>&nbsp;</span>to edit a text field. You can
+                    call on the APIs in steps 2 and 3 repeatedly as necessary to test more complex user interactions that involve multiple UI components or sequences of user actions.</li>
+                <pre><code>nameEditText.setText("Blah Blah");
+mUiDevice.findObject(new UiSelector().text("GREETING")).click();
+MotionEvent.PointerCoords pc1 = new MotionEvent.PointerCoords();
+pc1.x = 200;
+pc1.y = 200;
+pc1.pressure = 1;
+pc1.size = 10;
+......
+pc.PointerCoords[] coords1 = new MotionEvent.PointerCoords[1];
+coords1[0] = pc1;
+pc.PointerCoords[] coords2 = new MotionEvent.PointerCoords[1];
+coords12[0] = pc2;
+pc.PointerCoords[] coords3 = new MotionEvent.PointerCoords[2];
+coords13[0] = pc3;
+coords13[1] = pc3;
+touchLayout.performMultiPointerGesture(coords1, coords2, coords3);</code></pre>
+                <li>Check that the UI reflects the expected state or behavior, after these user interactions are performed.</li>
+                <pre><code>assertEquals("Madagascar", madagascar.getChild(new UiSelector().className(TextView.class)).getText());</code></pre>
+            </ol>
+
+            <h3>Accessing Device's State</h3>
+
+            <p>The <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html"><code>UiDevice</code></a><span>&nbsp;</span>object is the primary way you access and manipulate the state of the device. In your tests, you
+                can call <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html"><code>UiDevice</code></a><span>&nbsp;</span>methods to check for the state of various properties, such as current orientation or
+                display size. Your test can use the <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html"><code>UiDevice</code></a><span>&nbsp;</span>object to perform device-level actions, such as forcing the
+                device into a specific rotation, pressing D-pad hardware buttons, and pressing the Home and Menu buttons.</p>
+
+            <p>It&rsquo;s good practice to start your test from the Home screen of the device. From the Home screen (or some other starting location you&rsquo;ve chosen in the device), you can call the methods provided by the UI Automator API to select and
+                interact with specific UI elements.</p>
+
+            <p>The following code snippet shows how your test might get an instance of <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html"><code>UiDevice</code></a><span>&nbsp;</span>and simulate a Home button
+                press:
+            </p>
+            <pre><code>@RunWith(AndroidJUnit4.class)
+public class GreetingTest {
+
+    private static final String PACKAGE_NAME = "com.example.uiautomator";
+    private static final int LAUNCH_TIMEOUT = 5000;
+    private UiDevice mUiDevice;
+
+    @Before
+    public void setUp() throws Exception {
+        // Initialize UiDevice instance
+        mUiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        // Return to home
+        mUiDevice.pressHome();
+        //get launcher package name
+        final String launcherPackage = mUiDevice.getLauncherPackageName();
+        assertNotNull(launcherPackage);
+        mUiDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)), LAUNCH_TIMEOUT);
+        //get context
+        Context context = InstrumentationRegistry.getContext();
+        //create target package name
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+        //clear all instance
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //open app
+        context.startActivity(intent);
+        //wait until applications is started
+        mUiDevice.wait(Until.hasObject(By.pkg(PACKAGE_NAME).depth(0)), LAUNCH_TIMEOUT);
+    }
+}</code></pre>
+            <h3>Accessing UI Components</h3>
+            <p>Use the <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiDevice.html#findObject(android.support.test.uiautomator.UiSelector)"><code>findObject()</code></a><span>&nbsp;</span>method to retrieve a <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a><span>&nbsp;</span>which
+                represents a view that matches a given selector criteria. You can reuse the<a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a> instances that you have created in other
+                parts of your app testing, as needed. Note that the UI Automator test framework searches the current display for a match every time your test uses a<span>&nbsp;</span><a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a>                instance to click on a UI element or query a property.</p>
+
+            <p>The following snippet shows how your test might construct <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObject.html"><code>UiObject</code></a><span>&nbsp;</span>instances that represent a Greeting button
+                and a Edit Text field.</p>
+
+            <img fsrc="img/ui-automator-findview.png" />
+            <p>The <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html"><code>UiSelector</code></a><span>&nbsp;</span>class presents a query for sepecific elements in the currently displayed UI.</p>
+
+            <p>If more than one matchin element is found, the first matching element in the layout hierarchy is returned as the target UiObject. When constructing a <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html"><code>UiSelector</code></a>,
+                you can chain together multiple properties to refine your search. If no matching UI element is found, a<a href="https://developer.android.com/reference/android/support/test/uiautomator/UiObjectNotFoundException.html"><code>UiAutomatorObjectNotFoundException</code></a><span>&nbsp;</span>is
+                thrown.
+            </p>
+
+            <p>You can use the <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html#childSelector(android.support.test.uiautomator.UiSelector)"><code>childSelector()</code></a><span>&nbsp;</span>method to nest
+                multiple <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html"><code>UiSelector</code></a><span>&nbsp;</span>instances. For example, the following code example shows how your test might specify
+                a search to find the first <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code><span>&nbsp;</span>in the currently displayed UI, then search within that <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code><span>&nbsp;</span>to
+                find a UI element with the text property Apps.</p>
+            <pre><code>//find the madagascar
+UiObject madagascar = mUiDevice.findObject(new UiSelector()
+        .resourceId("com.example.uiautomator:id/list_country")
+        .childSelector(new UiSelector()
+                .className(LinearLayout.class)
+                .instance(3)));
+//madagascar should have 2 child and has madagascar text
+assertEquals(2, madagascar.getChildCount());
+assertEquals("Madagascar", madagascar.getChild(new UiSelector()
+                .className(TextView.class)).getText());</code></pre>
+            <p>As a best practice, when specifying a selector, you should use a Resource ID (if one is assigned to a UI element) instead of a text element or content-descriptor.</p>
+            <h3>Performing Actions</h3>
+            <p>With the selected UiObject, you can call the method in the UiObject class to perform user interactions on the Ui component presented by that object, such as: </p>
+            <ul>
+                <li>click() : Clicks the center of the visible bounds of the UI element.</li>
+                <li>dragTo() : Drags this object to arbitrary coordinates.</li>
+                <li>setText() : Sets the text in an editable field, after clearing the field's content. Conversely, the clear() method clears the existing text in an editable field.</li>
+                <li>swipeUp() : Performs the swipe up action on the UiObject. Similarly, the swipeDown(), swipeLeft(), and swipeRight() methods perform corresponding actions.</li>
+            </ul>
+            <pre><code>
+//swipe to the second tab
+mUiDevice.findObject(By.res("com.example.uiautomator:id/viewpager")).swipe(Direction.LEFT, 0.5f);
+//clear text
+mUiDevice.findObject(By.res("com.example.uiautomator:id/edit_name")).clear();
+//set text
+mUiDevice.findObject(By.res("com.example.uiautomator:id/edit_name")).setText("Obama");
+//click
+mUiDevice.findObject(new UiSelector().text("Greeting")).click();
+            </code></pre>
+            <p>Use the <a href="https://developer.android.com/reference/android/support/test/uiautomator/UiScrollable.html"><code>UiScrollable</code></a><span>&nbsp;</span>class to simulate vertical or horizontal scrolling across a display. This technique
+                is helpful when a UI element is positioned off-screen and you need to scroll to bring it into view.</p>
+            <pre><code>@Test
+public void testScrollListView() throws Exception {
+    UiScrollable countries = new UiScrollable(new UiSelector().resourceId("com.example.uiautomator:id/list_country"));
+    UiObject azerbaijan = countries.getChildByText(new UiSelector().className(TextView.class), "Azerbaijan");
+    assertNotNull(azerbaijan);
+}</code></pre>
+            <h3>Verifying result</h3>
+            <p>You can use standard JUnit <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">Assert</a> methods to test that Ui components in the app return the expected results.</p>
+            <h2>Example:</h2>
+            <h3>Use UI Automator without source code</h3>
+            <p>We'll test the application from section 12, please download APK from <a href="https://github.com/Innovatube/android-automation-test/blob/master/note-app-debug.apk">here</a> then install it to your phone or emulator.</p>
+            <p>Because we don&#39;t use project souce code, feel free to create a new project with minSDK is greater or equal to 18</p>
+            <img fsrc="img/ui-automator-example.png" />
+            <p><strong>Create a new Note</strong></p>
+            <ol>
+                <li>Inspect layout</li>
+                <img fsrc="img/ui-automator-step-1.png" />
+                <img fsrc="img/ui-automator-step-2.png" />
+                <li>Create a new test class</li>
+                <img fsrc="img/ui-automator-step-3.png" />
+                <li>Create a test method</li>
+                <pre><code>@Test
+public void testAddNote() throws Exception {
+    UiObject2 object2 = mUiDevice.findObject(By
+            .res("com.example.android.testing.notes:id/notes_list"));
+    mUiDevice.wait(Until.hasObject(By.res("com.example.android.testing.notes:id/notes_list")), WAIT_TIMEOUT);
+    //get current visible note
+    int currentNote = object2.findObjects(By.clazz(FrameLayout.class)).size();
+    //click on add note button
+    mUiDevice.findObject(By.res("com.example.android.testing.notes:id/fab_add_notes"))
+            .click();
+    //wait until add note screen is shown up
+    mUiDevice.wait(Until.hasObject(By
+                    .res("com.example.android.testing.notes:id/add_note_title"))
+            , WAIT_TIMEOUT);
+    //set title
+    mUiDevice.findObject(By.res("com.example.android.testing.notes:id/add_note_title"))
+            .setText("Go to the cinema");
+    //set description
+    mUiDevice.findObject(By.res("com.example.android.testing.notes:id/add_note_description"))
+            .setText("Your name is one of the best anime. " +
+                    "Call your girl friend, and take her to the cinema.");
+    //press back
+    mUiDevice.pressBack();
+    //save note
+    mUiDevice.findObject(By.res("com.example.android.testing.notes:id/fab_add_notes")).click();
+    //wait until a note list is shown up
+    mUiDevice.wait(Until.hasObject(By.clazz(TextView.class).text("Go to the cinema")), WAIT_TIMEOUT);
+    //the number of note should be increase by 1
+    UiCollection collection = new UiCollection(new UiSelector()
+            .resourceId("com.example.android.testing.notes:id/notes_list")
+            .childSelector(new UiSelector().className(FrameLayout.class)));
+    assertEquals(currentNote + 1, collection.getChildCount());
+}
+@Test
+public void testOpenNote() throws Exception {
+    mUiDevice.wait(Until.hasObject(By.res("com.example.android.testing.notes:id/notes_list")), WAIT_TIMEOUT);
+    UiObject firstNote = mUiDevice.findObject(new UiSelector()
+            .resourceId("com.example.android.testing.notes:id/notes_list")
+            .childSelector(new UiSelector()
+                    .className(FrameLayout.class).instance(0)));
+    String title = firstNote.getChild(new UiSelector().className(TextView.class).instance(0)).getText();
+    String description = firstNote.getChild(new UiSelector().className(TextView.class).instance(1)).getText();
+
+    firstNote.click();
+    mUiDevice.wait(Until.hasObject(By.res("com.example.android.testing.notes:id/note_detail_title")), WAIT_TIMEOUT);
+    assertEquals(title, mUiDevice.findObject(By.res("com.example.android.testing.notes:id/note_detail_title")).getText());
+    assertEquals(description, mUiDevice.findObject(By.res("com.example.android.testing.notes:id/note_detail_description")).getText());
+}
+</code></pre>
+            </ol>
+        </google-codelab-step>
+        <google-codelab-step label="Appium" duration="90">
+            <p>Appium is an open source test automation framework for use with native, hybrid and mobile web apps. It doesn't require including an SDK or recompiling app and supports multiple language.</p>
+            <p>Importantly, Appium is "cross-platform": it allows you to write tests against multiple platforms (iOS, Android, Windows), using the same API. This enables code reuse between iOS, Android, and Windows testsuites.</p>
+            <h2>Appium concepts</h2>
+            <p>Appium uses client/server architecture. Appium server receives connections from a client, listens for commands then excutes those commands on a mobile devices, and response with andd HTTP response representing the result of the command execution.</p>
+            <img fsrc="img/appium-architecture.png" alt="Appium's Architecture'" />
+            <p>Appium is a server written in Nodejs, it can be installed directly from NPM</p>
+            <pre><code>//you may want to install appium as super user
+npm install -g appium
+appium</code></pre>
+            <p>There are <a href="http://appium.io/slate/en/master/?ruby#appium-clients.md">client libraries</a> which support Appium's extensions to the WebDriver protocol.</p>
+            <h2>Install Appium</h2>
+            <p>Appium Desktop Apps provide GUI, but it's outdated, the latest update is over 1 years ago(windows) and 8 months ago(mac). If you have a problem with Appium Desktop, please install appium by using npm.</p>
+
+            <p>Desktop app: <a href="https://bitbucket.org/appium/appium.app/downloads/">download</a>.</p>
+            <p>NPM:</p>
+            <ol>
+                <li>Download and install the latest <a href="https://nodejs.org/en/">nodejs</a> and npm tools MSI (version >= 6.0). The npm and nodejs paths should be in your PATH environment variable.</li>
+                <li>Open terminal/cmd as superuser/administrator</li>
+                <li>Run the command <code>npm install -g appium</code> which will install Appium from NPM</li>
+                <li>To start Appium, you can now simply run <code>appium</code> from the terminal.</li>
+                <img fsrc="img/appium-start.png" />
+            </ol>
+            <h2>Android Setup</h2>
+            <p>If you don't have Android SDK, download from <a href="https://developer.android.com/studio/index.html#downloads">here</a>, and install an API level 17 or higher.</p>
+            <p>Finally, set <code>$ANDROID_HOME</code> to be your Andoid SDK path.</p>
+            <p>For example: </p>
+            <p>Linux: <code>export ANDROID_HOME=/PATH/TO/YOUR/ANDROID/SDK</code></p>
+            <p>Windows: <code>SETX /M ANDROID_HOME "/PATH/TO/YOUR/ANDROID/SDK"</code></p>
+            <h2>Create your first test use java</h2>
+            <p>Your first test will be note app. Download it from <a href="https://github.com/Innovatube/android-automation-test/blob/master/note-app-debug.apk">here</a>.</p>
+            <p>Feel free to use your favorite language and IDE, but the instruction will use java and <a href="https://www.jetbrains.com/idea/">Intellij</a></p>
+            <img fsrc="img/create-maven.jpg" />
+            <ol>
+                <li>Open Intellij and Create New project.</li>
+                <li>Select Maven and press <i>Next</i>.</li>
+                <li>Fill out <i>GroupId</i>, <i>ArtifactId</i> and <i>Version.</i></li>
+                <li>Fill out <i>project name</i> and <i>project location</i> then press <i>Finish</i>.</li>
+                <li>Add the following dependency to <code>pom.xml</code></li>
+                <pre><code>
+//change 5.0.0-BETA1 to the latest version
+&lt;dependency&gt;
+    &lt;groupId&gt;io.appium&lt;/groupId&gt;
+    &lt;artifactId&gt;java-client&lt;/artifactId&gt;
+    &lt;version&gt;5.0.0-BETA1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.4&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+                <li>Copy the apk file to src/main/resources</li>
+                <li>Create your first test under src/test/java</li>
+                <p>The minimal setup is: </p>
+                <pre><code>public class AddNoteTest {
+    private AndroidDriver driver;
+    private File noteApk = new File("src/main/resources/note-app-debug.apk");
+
+    @Before
+    public void setUp() throws Exception {
+        //declare device's capabilities
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        //device name
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
+        //path to your apk
+        capabilities.setCapability(MobileCapabilityType.APP, noteApk.getAbsolutePath());
+        //platform name
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
+        //initialize driver with url and capabilities, if you don't change parameter, default ip is 127.0.0.01
+        //and the default host is 4723
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+    }
+    @After
+    public void tearDown() throws Exception {
+        driver.quit();
+
+    }
+}</code></pre>
+                <li>Use UI Automator to locate element</li>
+                <li>Write test method</li>
+                <p>Similar to UIAutomator, we find element then perform action, and verify result by using assert or similar libaries. </p>
+                <pre><code>
+@Test
+public void testAddNote() throws Exception {
+    //initialize a wait instance
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    //wait until the number of visible notes is greater than 0
+    wait.until(ExpectedConditions
+            .numberOfElementsToBeMoreThan(By
+                    .xpath("//android.support.v7.widget.RecyclerView/android.widget.FrameLayout"), 0));
+    //count the number of notes
+    int currentNumOfNote = driver.findElement(By.id("notes_list"))
+             .findElements(By.className("android.widget.FrameLayout"))
+            .size();
+    //find add note button and click
+    driver.findElement(By.id("fab_add_notes")).click();
+    //wait until add_note_tile is visible
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("add_note_title")));
+    //set note title
+    driver.findElement(By.id("add_note_title")).sendKeys("Buy Final Fantasy XV");
+    //note description
+    driver.findElement(By.id("add_note_description")).sendKeys("Blah blah");
+    //save
+    driver.findElement(By.id("fab_add_notes")).click();
+    //wait until the element contains 'Final Fantasy XV' is visible
+    wait.until(ExpectedConditions
+            .presenceOfElementLocated(By.xpath("//android.widget.TextView[contains(@text, 'Final Fantasy XV')]")));
+    //count the number of notes
+    int newNumOfNote = driver.findElement(By.id("notes_list"))
+            .findElements(By.className("android.widget.FrameLayout"))
+            .size();
+    assertEquals(currentNumOfNote+1, newNumOfNote);
+}</code></pre>
+            </ol>
+            <p><a href="http://appium.io/slate/en/master/?java#the-default-capabilities-flag">DesiredCapabilities</a> describe a series of key/value pairs that encapsulate aspects of a testing enviroment we want to test</p>
+            <p><a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebElement.html">WebElement</a> is a general interface which comes from Selenium, it represents an html element.</p>
+            <p><a href="http://appium.github.io/java-client/io/appium/java_client/AppiumDriver.html">AppiumDriver</a> contains all methods shared between iOS and Android. <a href="http://appium.github.io/java-client/io/appium/java_client/android/AndroidDriver.html">AndroidDriver</a>                extends AppiumDriver and provides more methods and android's specific implementations.</p>
+            <p><a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/support/ui/WebDriverWait.html">WebDriverWait</a> is an specialization of FluentWait. It will wait under specific condition.</p>
+        </google-codelab-step>
     </google-codelab>
 
-    <script src="bower_components/lightbox/lightbox-plus-jquery.min.js "></script>
+    <script src="bower_components/lightbox/lightbox.min.js "></script>
 </body>
 
 </html>
