@@ -187,7 +187,7 @@ Check for Update</strong>.</p>
             <p>The combination of build types and build flavor forms a <i>Build Variants</i>.</p>
             <p>To add a new Flavor</p>
             <p>Click on Build-> Edit Flavors</p>
-            <img fsrc="img/add-flavor.jpg"  style="max-width: 370px"/>
+            <img fsrc="img/add-flavor.jpg" style="max-width: 370px" />
             <p>You can edit the flavor name, application id, add a new signing config... Click on <i>OK</i> when you're done </p>
             <img fsrc="img/edit-flavor.jpg" />
             <p>To change <i>Build Variant</i>, perform the following step:</p>
@@ -261,6 +261,7 @@ $ uiautomatorviewer
             <h3>Download Espresso</h3>
             <ol>
                 <li>Make sure you have installed the latest Android Support Repository under Extras.</li>
+                <a href="img/open-sdk-manager.png" data-lightbox="example"><img fsrc="img/open-sdk-manager.png " style="max-width: 335.08px;" data-lightbox="open-sdk-manager" /></a>
                 <a href="img/support-libs.png" data-lightbox="example"><img fsrc="img/support-libs.png " data-lightbox="support-libs" /></a>
                 <li>Swith to Android view.</li>
                 <li>Open your app’s build.gradle file. This is usually not the top-level build.gradle file but app/build.gradle.</li>
@@ -272,7 +273,7 @@ androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
 })</code></pre>
                 <li>Set the instrumentation runner</li>
-                <pre><code>testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner "</code></pre>
+                <pre><code>testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"</code></pre>
                 <li>Click Sync Now</li>
             </ol>
             <a href="img/espresso-setup.jpg" data-lightbox="example"><img fsrc="img/espresso-setup.jpg" data-lightbox="espresso-setup" /></a>
@@ -292,7 +293,7 @@ android {
         versionCode 1
         versionName "1.0 "
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner "
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 }
 
