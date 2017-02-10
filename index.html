@@ -497,22 +497,13 @@ public class HelloWorldEspressoTest {
                     ">matches()</code> assertion, it uses a <code class="highlighter-rouge ">ViewMatcher</code> to assert the state of the currently selected view.</p>
 
             <p>For example, to check that a view has the text “Hello!”:</p>
-
-            <pre><code>Espresso.onView(...).check(ViewAssertions.matches(ViewMatchers.withText("Hello!")));</code></pre>
-            <p><em>Note:</em> Do not put “assertions” into the onView argument - instead, clearly specify what you are checking inside the check block. For example:</p>
-            <p> To check that a view is above the other view</p>
-            <pre><code></code></pre>
+            <pre><code>onView(...).check(matches(withText("Hello!")));</code></pre>
             <p>If you want to assert that “Hello!” is content of the view, the following is considered bad practice:</p>
-
-            <pre><code>// Don't use assertions like withText inside onView.
-Espresso.onView(Matchers.allOf(ViewMatchers.withId(...), ViewMatchers.withText("Hello!
-                    "))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-</code></pre>
-
+            <pre><code>onView(allOf(withId(...), withText("Hello!"))).check(matches(isDisplayed()));</code></pre>
             <p>On the other hand, if you want to assert that a view with the text “Hello!” is visible - for example after a change of the views visibility flag - the code is fine.</p>
 
             <p><strong>Note:</strong> Be sure to pay attention to the difference between <em>asserting that a view is not displayed</em> and <em>asserting that a view is not present</em> in the view hierarchy.</p>
-            <p><strong>Practice: open CheckViewActivityTest.java, then verify button's text is 'Hello Button' and textivew's text is 'Hello TextView'</strong></p>
+            <p><strong>Practice: open CheckViewActivityTest.java, then verify button's text is 'Hello Button' and content of textiew is 'Hello TextView'</strong></p>
             <h2 id="get-started-with-a-simple-test-using-onview">Get started with a simple test using onView</h2>
 
             <p>In this example <code class="highlighter-rouge">MainActivity</code> contains a <code class="highlighter-rouge ">Button</code>, <code class="highlighter-rouge ">EditText</code> and a <code class="highlighter-rouge
