@@ -29,7 +29,7 @@ public class CheckViewActivityTestSolution {
 
     @Test
     public void testButtonWithText() throws Exception {
-        Espresso.onView(ViewMatchers.withId(R.id.text_hello))
+        Espresso.onView(ViewMatchers.withId(R.id.button_hello))
                 .check(ViewAssertions.matches(ViewMatchers.withText("Hello Button")));
     }
 }
