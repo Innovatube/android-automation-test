@@ -36,6 +36,6 @@ public class MainActivityTestSolution {
         Espresso.onView(ViewMatchers.withId(R.id.button_greeting))
                 .perform(ViewActions.click());
         Espresso.onView(ViewMatchers.withId(R.id.text_greeting_unique))
-                .check(ViewAssertions.matches(ViewMatchers.withText("Hello there")));
+                .check(ViewAssertions.matches(ViewMatchers.withText("Hello Shane")));
     }
 }
