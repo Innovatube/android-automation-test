@@ -28,49 +28,6 @@ import static org.hamcrest.Matchers.not;
 
 /**
  * Created by quanlt on 11/01/2017.
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
  */
 @RunWith(AndroidJUnit4.class)
 public class HomeActivityTestWithDialog {

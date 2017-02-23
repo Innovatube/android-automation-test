@@ -3,6 +3,7 @@ package com.innovatube.boilerplate.ui.home;
 import com.innovatube.boilerplate.data.GithubRepository;
 import com.innovatube.boilerplate.data.model.User;
 import com.innovatube.boilerplate.ui.base.BasePresenter;
+import com.innovatube.boilerplate.utils.EspressoIdlingResource;
 import com.innovatube.boilerplate.utils.InnovatubeUtils;
 
 import javax.inject.Inject;
@@ -30,7 +31,7 @@ public class HomePresenter extends BasePresenter<HomeMvpView> {
 
     public void getUser(String username) {
         getMvpView().showProgressDialog(true);
-        //EspressoIdlingResource.increment();
+        EspressoIdlingResource.increment();
         mSubscription = mGithubRepository.getUser(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,14 +42,14 @@ public class HomePresenter extends BasePresenter<HomeMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        //EspressoIdlingResource.decrement();
+                        EspressoIdlingResource.decrement();
                         getMvpView().showProgressDialog(false);
                         getMvpView().showAlertDialog(InnovatubeUtils.getError(e, mRetrofit));
                     }
 
                     @Override
                     public void onNext(User user) {
-                        //EspressoIdlingResource.decrement();
+                        EspressoIdlingResource.decrement();
                         getMvpView().showProgressDialog(false);
                         getMvpView().showUser(user);
                     }

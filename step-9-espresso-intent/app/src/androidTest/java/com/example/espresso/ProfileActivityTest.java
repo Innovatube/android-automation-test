@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.test.espresso.intent.matcher.IntentMatchers;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.espresso.matcher.BoundedMatcher;
@@ -13,10 +14,13 @@ import android.widget.ImageView;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -37,6 +41,15 @@ import static org.junit.Assert.fail;
 public class ProfileActivityTest {
     @Rule
     public IntentsTestRule mActivityRule = new IntentsTestRule(ProfileActivity.class);
+
+    @Before
+    public void setUp() throws Exception {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getInstrumentation().getUiAutomation()
+                    .executeShellCommand("pm grant " + getTargetContext().getPackageName() + " android.permission.READ_EXTERNAL_STORAGE");
+        }
+
+    }
 
     @Test
     public void testSignUpFlow() throws Exception {

@@ -29,6 +29,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFro
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
@@ -46,7 +47,10 @@ public class MainActivityTest {
         AccessibilityChecks.enable()
                 .setRunChecksFromRootView(true)
                 .setSuppressingResultMatcher(AccessibilityCheckResultUtils
-                        .matchesViews(anyOf(withContentDescription("More options"), allOf(ViewMatchers.))));
+                        .matchesViews(anyOf(withContentDescription("More options"),
+                                withResourceName("date_picker_header_year"),
+                                withResourceName("date_picker_header_date"),
+                                withResourceName("month_view"))));
     }
 
     @Test

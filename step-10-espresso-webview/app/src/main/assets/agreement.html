@@ -8,6 +8,10 @@
 		color: #444;
 	}
 
+
+
+
+
     </style>
 </head>
 <body>
@@ -20,7 +24,7 @@
     license as the “Licensed Application.”</p>
 <form>
     <span>Enter your name:</span>
-    <input type="text" name="name"/>
+    <input type="text" id="name" name="name"/>
     <br>
     <span>I agree:</span>
     <input type="checkbox" name="agree"/>
@@ -33,14 +37,22 @@
         element.addEventListener('submit', event => {
             event.preventDefault();
             console.log(element.elements);
+            console.log(element[0])
             if(!element.elements[1].checked){
                 instruction.innerHTML="Please accept the agreement";
-            }else if(element.elements[1].value.length!=0){
-                instruction.innerHTML = "Please type your name";
-            }else{
+                return;
+            }
+            if(element.elements[0].value.length ==0){
+                instruction.innerHTML = "Please enter your name";
+                return;
+            } else {
                 instruction.innerHTML = "Thank you " + element.elements[0].value + "!";
             }
         });
+
+
+
+
 
 
 </script>
